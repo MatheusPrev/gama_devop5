@@ -8,7 +8,7 @@ resource "aws_instance" "web" {
   #subnet_id     = "subnet-009732771798c000e"
   subnet_id     = var.subnet_id
   vpc_security_group_ids = ["${aws_security_group.permitir_ssh.id}"]
-  key_name      = "key_matheus_dev_ubunto"
+  key_name      = "key_devop5_projeto"
   
   associate_public_ip_address = true
   
@@ -18,6 +18,6 @@ resource "aws_instance" "web" {
   }
     
   tags = {
-    Name = "ec2-matheus-deploy-1"
+    Name = "ec2-devop5-projeto"
   }
 }
