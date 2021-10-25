@@ -1,19 +1,19 @@
 resource "aws_vpc" "my_vpc" {
-  cidr_block = "172.17.0.0/16"
+  cidr_block = "10.16.0.0/22"
   enable_dns_hostnames = true
 
   tags = {
-    Name = "MatheusTerraformVPC"
+    Name = "vpc_devop5_projeto"
   }
 }
 
 resource "aws_subnet" "my_subnet" {
   vpc_id            = aws_vpc.my_vpc.id
-  cidr_block        = "172.17.0.0/16"
-  availability_zone = "sa-east-1a"
+  cidr_block        = "10.16.1.0/24"
+  availability_zone = "us-east-1a"
 
   tags = {
-    Name = "matheus_sub_terraform"
+    Name = "sub_devop5_projeto"
   }
 }
 
@@ -21,7 +21,7 @@ resource "aws_internet_gateway" "gw" {
   vpc_id = aws_vpc.my_vpc.id
 
   tags = {
-    Name = "matheus_ig_terraform"
+    Name = "ig_devop5_projeto"
   }
 }
 
@@ -47,7 +47,7 @@ resource "aws_route_table" "rt_terraform" {
   ]
 
   tags = {
-    Name = "matheus_rt_terraform"
+    Name = "rt_devop5_projeto"
   }
 }
 
