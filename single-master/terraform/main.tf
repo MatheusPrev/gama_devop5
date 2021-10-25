@@ -92,19 +92,19 @@ resource "aws_security_group" "acessos_master" {
       security_groups : null,
       self : null
     },
-    #{
-    #  cidr_blocks      = []
-    #  description      = ""
-    #  from_port        = 0
-    #  ipv6_cidr_blocks = []
-    #  prefix_list_ids  = []
-    #  protocol         = "tcp"
-    #  security_groups = [
-    #    "sg-05baab447d1b51879",
-    #  ]
-    #  self    = false
-    #  to_port = 65535
-    #},
+    {
+      cidr_blocks      = []
+      description      = ""
+      from_port        = 0
+      ipv6_cidr_blocks = []
+      prefix_list_ids  = []
+      protocol         = "tcp"
+      security_groups = [
+        "sg-0f34a3650caf580cc",
+      ]
+      self    = false
+      to_port = 65535
+    },
   ]
 
   egress = [
@@ -157,19 +157,19 @@ resource "aws_security_group" "acessos_workers" {
       self             = false
       to_port          = 22
     },
-    #{
-    #  cidr_blocks      = []
-    #  description      = ""
-    #  from_port        = 0
-    #  ipv6_cidr_blocks = []
-    #  prefix_list_ids  = []
-    #  protocol         = "tcp"
-    #  security_groups = [
-    #    "sg-079f27458cdec1b2b",
-    #  ]
-    #  self    = false
-    #  to_port = 65535
-    #},
+    {
+      cidr_blocks      = []
+      description      = ""
+      from_port        = 0
+      ipv6_cidr_blocks = []
+      prefix_list_ids  = []
+      protocol         = "tcp"
+      security_groups = [
+        "sg-066e07c0436815bc6",
+      ]
+      self    = false
+      to_port = 65535
+    },
   ]
 
   egress = [
