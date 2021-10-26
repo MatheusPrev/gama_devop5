@@ -30,11 +30,8 @@ ID_MAQUINA=$(/usr/local/bin/terraform output | grep id | awk '{print $2;exit}')
 echo ${ID_MAQUINA/\",/}
 
 #cd /home/ubuntu/gama_devop5/single-master/ami-terraform
-cd ../
-cd ami-terraform
-
-/usr/local/bin/terraform init
-/usr/local/bin/terraform fmt
-/usr/local/bin/terraform apply -var="resource_id=${ID_MAQUINA/\",/}" -auto-approve 
+#/usr/local/bin/terraform init
+#/usr/local/bin/terraform fmt
+#/usr/local/bin/terraform apply -var="resource_id=${ID_MAQUINA/\",/}" -auto-approve 
 #/usr/local/bin/terraform apply -var="resource_id=i-062b0b80ee1469f44" -auto-approve 
-/usr/local/bin/terraform output
+#/usr/local/bin/terraform output
