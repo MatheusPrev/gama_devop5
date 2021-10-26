@@ -15,7 +15,7 @@ ansible-playbook -i hosts provisionar.yml -u ubuntu --private-key ~/.ssh/id_rsa
 cd /home/ubuntu/gama_devop5/single-master/terraform
 /usr/local/bin/terraform output
 
-echo $"Agora somente abrir a URL: http://$(/usr/local/bin/terraform output | grep public | awk '{print $2;exit}'):8080" | sed -e "s/\",//g"
+echo $"Agora somente abrir a URL: http://$(/usr/local/bin/terraform output | grep public_dns | awk '{print $2;exit}'):8080" | sed -e "s/\",//g"
 
 ID_MAQUINA=$(/usr/local/bin/terraform output | grep id | awk '{print $2;exit}')
 echo ${ID_MAQUINA/\",/}
