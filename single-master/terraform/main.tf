@@ -165,7 +165,7 @@ resource "aws_security_group" "acessos_workers" {
       prefix_list_ids  = []
       protocol         = "tcp"
       security_groups = [
-        "sg-016f5d475a2ed4e5f",
+        {aws_security_group.acessos_master.id},
       ]
       self    = false
       to_port = 65535
