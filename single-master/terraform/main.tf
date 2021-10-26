@@ -164,7 +164,7 @@ resource "aws_security_group" "acessos_workers" {
       ipv6_cidr_blocks = []
       prefix_list_ids  = []
       protocol         = "tcp"
-      security_groups = ["${aws_security_group.acessos_master.id}"]
+      security_groups = ["sg-0b92c1829f18f0db1",]
       self    = false
       to_port = 65535
     },
