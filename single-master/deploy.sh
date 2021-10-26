@@ -16,11 +16,12 @@ echo "Aguardando criação de maquinas ..."
 sleep 30 # 30 segundos
 
 #cd /home/ubuntu/gama_devop5/single-master/ansible
-cd single-master/ansible
+cd ansible
 ansible-playbook -i hosts provisionar.yml -u ubuntu --private-key ~/.ssh/id_rsa
 
 #cd /home/ubuntu/gama_devop5/single-master/terraform
-cd single-master/terraform
+cd ../
+cd terraform
 /usr/local/bin/terraform output
 
 echo $"Agora somente abrir a URL: http://$(/usr/local/bin/terraform output | grep public_dns | awk '{print $2;exit}'):8080" | sed -e "s/\",//g"
@@ -29,7 +30,8 @@ ID_MAQUINA=$(/usr/local/bin/terraform output | grep id | awk '{print $2;exit}')
 echo ${ID_MAQUINA/\",/}
 
 #cd /home/ubuntu/gama_devop5/single-master/ami-terraform
-cd single-master/ami-terraform
+cd ../
+cd ami-terraform
 
 /usr/local/bin/terraform init
 /usr/local/bin/terraform fmt
