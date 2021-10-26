@@ -19,7 +19,7 @@ pwd
 
 #cd /home/ubuntu/gama_devop5/single-master/ansible
 cd ansible
-ansible-playbook -i hosts provisionar.yml -u ubuntu --private-key ~/.ssh/id_rsa -auto-approve
+ansible-playbook -i hosts provisionar.yml -u ubuntu --private-key ~/.ssh/id_rsa
 #cd /home/ubuntu/gama_devop5/single-master/terraform
 cd ../
 cd terraform
