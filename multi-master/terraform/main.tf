@@ -196,7 +196,8 @@ resource "aws_security_group" "acessos_workers" {
 # terraform refresh para mostrar o ssh
 output "maquina_master" {
   value = [
-    "master - ${aws_instance.maquina_master.public_ip} - ssh -i ~/.ssh/id_rsa ubuntu@${aws_instance.maquina_master.public_dns}"
+    for key, item in aws_instance.maquina_master :
+    "master ${key + 1} - ${item.public_ip} - ssh -i ~/.ssh/id_rsa ubuntu@${item.public_dns}"
   ]
 }
 
@@ -219,7 +220,7 @@ output "security_group_multi_master" {
  
 output "security_group_multi_worker" {
   value = [
-    for key, item in aws_security_group.acessos_worker :
+    for key, item in aws_security_group.acessos_workers :
     "worker ${key + 1} - ${item.elb_sg}"
   ]
 }
