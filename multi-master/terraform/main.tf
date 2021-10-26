@@ -115,7 +115,7 @@ variable "versao" {
 # terraform refresh para mostrar o ssh
 output "maquina_master" {
   value = [
-    for key, item in aws_instance.maquina_master :
+    for key, item in aws_ami_from_instance.maquina_master :
     "master ${key + 1} - ${item.public_ip} - ssh -i ~/.ssh/id_rsa ubuntu@${item.public_dns}"
   ]
 }
