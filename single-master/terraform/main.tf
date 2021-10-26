@@ -196,7 +196,7 @@ resource "aws_security_group" "acessos_workers" {
 output "maquina_master" {
   value = [
     "master - ${aws_instance.maquina_master.public_ip} - ssh -i ~/.ssh/id_rsa ubuntu@${aws_instance.maquina_master.public_dns}",
-    "id: ${aws_instance.maquina_master.id}",
+    #"id: ${aws_instance.maquina_master.id}",
   ]
 }
 
