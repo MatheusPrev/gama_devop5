@@ -210,5 +210,8 @@ output "aws_instance_e_ssh" {
 output "aws_instance_id" {
   value = [
     "id: ${aws_instance.maquina_master.id}",
+    "private: ${aws_instance.maquina_master.private_ip}",
+    "public: ${aws_instance.maquina_master.public_ip}",
+    "public_dns: ${aws_instance.maquina_master.public_dns}",
   ]
 }
