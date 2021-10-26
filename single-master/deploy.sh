@@ -1,10 +1,11 @@
 #cd /home/ubuntu/gama_devop5/single-master/terraform
-cd /terraform
+cd single-master/terraform
 /usr/local/bin/terraform init
 /usr/local/bin/terraform fmt
 /usr/local/bin/terraform apply -auto-approve
 
 cd ../
+pwd
 
 #echo $"[ec2-jenkins]" >> /home/ubuntu/gama_devop5/single-master/ansible/hosts # cria arquivo
 echo $"[ec2-jenkins]" > ansible/hosts # cria arquivo
