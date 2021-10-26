@@ -4,16 +4,18 @@ cd single-master/terraform
 /usr/local/bin/terraform fmt
 /usr/local/bin/terraform apply -auto-approve
 
-cd ../
-pwd
+
 
 #echo $"[ec2-jenkins]" >> /home/ubuntu/gama_devop5/single-master/ansible/hosts # cria arquivo
-echo $"[ec2-jenkins]" > ansible/hosts # cria arquivo
+echo $"[ec2-jenkins]" > ../ansible/hosts # cria arquivo
 #echo "$(/usr/local/bin/terraform output | grep public_dns | awk '{print $2;exit}')" | sed -e "s/\",//g" >> /home/ubuntu/gama_devop5/single-master/ansible/hosts # captura output faz split de espaco e replace de ",
-echo "$(/usr/local/bin/terraform output | grep public_dns | awk '{print $2;exit}')" | sed -e "s/\",//g" >> ansible/hosts
+echo "$(/usr/local/bin/terraform output | grep public_dns | awk '{print $2;exit}')" | sed -e "s/\",//g" >> ../ansible/hosts
 
 echo "Aguardando criação de maquinas ..."
 sleep 30 # 30 segundos
+
+cd ../
+pwd
 
 #cd /home/ubuntu/gama_devop5/single-master/ansible
 cd ansible
