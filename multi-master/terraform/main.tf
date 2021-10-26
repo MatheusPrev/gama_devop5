@@ -213,7 +213,7 @@ output "aws_instance_e_ssh" {
 output "security_group_multi_master" {
   value = [
     for key, item in aws_security_group.acessos_master :
-    "master ${key + 1} - ${item.elb_sg}"
+    "master ${key + 1} - ${item.id}"
   ]
 }
   
@@ -221,6 +221,6 @@ output "security_group_multi_master" {
 output "security_group_multi_worker" {
   value = [
     for key, item in aws_security_group.acessos_workers :
-    "worker ${key + 1} - ${item.elb_sg}"
+    "worker ${key + 1} - ${item.id}"
   ]
 }
