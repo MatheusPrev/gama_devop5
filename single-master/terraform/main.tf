@@ -213,7 +213,7 @@ output "aws_instance_outputID" {
     "private: ${aws_instance.maquina_master.private_ip}",
     "public: ${aws_instance.maquina_master.public_ip}",
     "public_dns: ${aws_instance.maquina_master.public_dns}",
-    "sg_workers: ${aws_security_group.acessos_workers.id",
-    "sg_master: ${aws_security_group.acessos_master.id",
+    "sg_workers: ${aws_security_group.acessos_workers.id}",
+    "sg_master: ${aws_security_group.acessos_master.id}",
   ]
 }
