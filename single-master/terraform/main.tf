@@ -19,7 +19,7 @@ data "aws_ami" "ubuntu" {
 resource "aws_instance" "maquina_master" {
   ami           = data.aws_ami.ubuntu.id
   instance_type = "t2.medium"
-  key_name      = "key_devop5_projeto"
+  key_name      = "devop5_jenkins_out"
   tags = {
     Name = "devop5_single_master"
   }
@@ -42,7 +42,7 @@ resource "aws_instance" "maquina_master" {
 resource "aws_instance" "workers" {
   ami           = data.aws_ami.ubuntu.id
   instance_type = "t2.micro"
-  key_name      = "key_devop5_projeto"
+  key_name      = "devop5_jenkins_out"
   tags = {
     Name = "devop5_single_worker-${count.index}"
   }
@@ -100,7 +100,7 @@ resource "aws_security_group" "acessos_master" {
       prefix_list_ids  = []
       protocol         = "tcp"
       security_groups = [
-        "sg-016f5d475a2ed4e5f",
+        # "sg-016f5d475a2ed4e5f",
       ]
       self    = false
       to_port = 65535
@@ -164,7 +164,7 @@ resource "aws_security_group" "acessos_workers" {
       ipv6_cidr_blocks = []
       prefix_list_ids  = []
       protocol         = "tcp"
-      security_groups = ["sg-0b92c1829f18f0db1","sg-016f5d475a2ed4e5f",]
+       # security_groups = ["sg-0b92c1829f18f0db1","sg-016f5d475a2ed4e5f",]
       self    = false
       to_port = 65535
     },
