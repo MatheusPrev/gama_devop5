@@ -21,6 +21,7 @@ cd ansible
 ansible-playbook -i hosts provisionar.yml -u ubuntu --private-key ~/.ssh/id_rsa
 
 cd ../
+pwd
 cd terraform
 /usr/local/bin/terraform output
 
