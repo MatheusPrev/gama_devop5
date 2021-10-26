@@ -17,7 +17,7 @@ data "aws_ami" "ubuntu" {
 }
 
 resource "aws_instance" "maquina_master" {
-  ami           = "${data.aws_ami.ubuntu.id}"
+  ami           = data.aws_ami.ubuntu.id
   instance_type = "t2.medium"
   key_name      = "key_devop5_projeto"
   tags = {
@@ -40,7 +40,7 @@ resource "aws_instance" "maquina_master" {
 }
 
 resource "aws_instance" "workers" {
-  ami           = "${data.aws_ami.ubuntu.id}"
+  ami           = data.aws_ami.ubuntu.id
   instance_type = "t2.micro"
   key_name      = "key_devop5_projeto"
   tags = {
