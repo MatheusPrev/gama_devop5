@@ -13,7 +13,7 @@ data "aws_ami" "ubuntu" {
 }
 
 resource "aws_ami_from_instance" "maquina_master" {
-  name          = "devop5_multi_master-${count.index}"
+  name          = "devop5_multi_master-${count.index}-${var.versao}"
   source_instance_id = var.resource_id
   count = 3
 }
