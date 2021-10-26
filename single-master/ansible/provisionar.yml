@@ -1,4 +1,5 @@
 - hosts: all
+  become: true
   tasks:
 
     - name: install packages required by docker
