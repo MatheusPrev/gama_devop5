@@ -17,7 +17,7 @@ cd /home/ubuntu/gama_devop5/single-master/terraform
 
 echo $"Agora somente abrir a URL: http://$(/usr/local/bin/terraform output | grep public_dns | awk '{print $2;exit}'):8080" | sed -e "s/\",//g"
 
-ID_MAQUINA=$(/usr/local/bin/terraform output | grep id | awk '{print $2;exit}')
+ID_MAQUINA=$(/usr/local/bin/terraform output | {aws_instance.maquina_master.public_ip} | awk '{print $2;exit}')
 echo ${ID_MAQUINA/\",/}
 
 cd /home/ubuntu/gama_devop5/single-master/ami-terraform
