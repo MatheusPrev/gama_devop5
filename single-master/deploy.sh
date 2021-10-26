@@ -7,7 +7,7 @@ cd single-master/terraform
 
 
 #echo $"[ec2-jenkins]" >> /home/ubuntu/gama_devop5/single-master/ansible/hosts # cria arquivo
-echo $"[ec2-jenkins]" > ../ansible/hosts # cria arquivo
+echo "[ec2-jenkins]" > ../ansible/hosts # cria arquivo
 #echo "$(/usr/local/bin/terraform output | grep public_dns | awk '{print $2;exit}')" | sed -e "s/\",//g" >> /home/ubuntu/gama_devop5/single-master/ansible/hosts # captura output faz split de espaco e replace de ",
 echo "$(/usr/local/bin/terraform output | grep public_dns | awk '{print $2;exit}')" | sed -e "s/\",//g" >> ../ansible/hosts
 
