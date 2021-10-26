@@ -1,4 +1,4 @@
-#cd /home/ubuntu/gama_devop5/single-master/ami-terraform
+pwd
 cd ami-terraform
 /usr/local/bin/terraform init
 /usr/local/bin/terraform fmt
