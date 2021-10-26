@@ -12,7 +12,7 @@ echo "[ec2-jenkins]" > ../ansible/hosts # cria arquivo
 echo "$(/usr/local/bin/terraform output | grep public_dns | awk '{print $2;exit}')" | sed -e "s/\",//g" >> ../ansible/hosts
 
 echo "Aguardando criação de maquinas ..."
-sleep 30 # 30 segundos
+sleep 10 # 30 segundos
 
 cd ../
 pwd
