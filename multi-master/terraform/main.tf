@@ -2,10 +2,6 @@ provider "aws" {
   region = "us-east-1"
 }
 
-data "http" "myip" {
-  url = "http://ipv4.icanhazip.com" # outra opção "https://ifconfig.me"
-}
-
 data "aws_ami" "ubuntu" {
   most_recent = true
   owners      = ["099720109477"] # ou ["099720109477"] ID master com permissão para busca
@@ -16,27 +12,9 @@ data "aws_ami" "ubuntu" {
   }
 }
 
-resource "aws_instance" "maquina_master" {
-  ami           = "${data.aws_ami.ubuntu.id}"
-  instance_type = "t2.medium"
-  key_name      = "key_devop5_projeto"
-  tags = {
-    Name = "devop5_multi_master-${count.index}"
-  }
-  subnet_id                   = "subnet-0dbc6439c94e66d76"
-  associate_public_ip_address = true
-
-
-  root_block_device {
-    encrypted = true
-    #kms_key_id  = "arn:aws:kms:us-east-1:534566538491:key/90847cc8-47e8-4a75-8a69-2dae39f0cc0d"
-    volume_size = 20
-  }
-
-  vpc_security_group_ids = ["${aws_security_group.acessos_master.id}"]
-  depends_on = [
-    aws_instance.workers,
-  ]
+resource "aws_ami_from_instance" "maquina_master" {
+  name          = "devop5_multi_master-${count.index}"
+  source_instance_id = var.resource_id
   count = 3
 }
 
@@ -59,74 +37,6 @@ resource "aws_instance" "workers" {
   vpc_security_group_ids = ["${aws_security_group.acessos_workers.id}"]
   count                  = 3
 }
-
-
-resource "aws_security_group" "acessos_master" {
-  name        = "devop5_multi_master_sg"
-  description = "acessos_workers inbound traffic"
-  vpc_id      = "vpc-000ac43d9700f2e6c"
-
-  ingress = [
-    {
-      description      = "SSH from VPC"
-      from_port        = 22
-      to_port          = 22
-      protocol         = "tcp"
-      cidr_blocks      = ["0.0.0.0/0"] #["${chomp(data.http.myip.body)}/32"]
-      ipv6_cidr_blocks = ["::/0"]
-      prefix_list_ids  = null,
-      security_groups : null,
-      self : null
-    },
-    {
-      description = "Libera porta kubernetes"
-      from_port   = 6443
-      to_port     = 6443
-      protocol    = "tcp"
-      cidr_blocks = [
-        "${chomp(data.http.myip.body)}/32",
-        "${aws_instance.workers[0].private_ip}/32",
-        "${aws_instance.workers[1].private_ip}/32",
-      ]
-      ipv6_cidr_blocks = ["::/0"]
-      prefix_list_ids  = null,
-      security_groups : null,
-      self : null
-    },
-    #{
-    #  cidr_blocks      = []
-    #  description      = ""
-    #  from_port        = 0
-    #  ipv6_cidr_blocks = []
-    #  prefix_list_ids  = []
-    #  protocol         = "tcp"
-    #  security_groups = [
-    #    "sg-0d7dbefa8a3d002d7",
-    #  ]
-    #  self    = false
-    #  to_port = 65535
-    #},
-  ]
-
-  egress = [
-    {
-      from_port        = 0
-      to_port          = 0
-      protocol         = "-1"
-      cidr_blocks      = ["0.0.0.0/0"]
-      ipv6_cidr_blocks = ["::/0"],
-      prefix_list_ids  = null,
-      security_groups : null,
-      self : null,
-      description : "Libera dados da rede interna"
-    }
-  ]
-
-  tags = {
-    Name = "acessos_master"
-  }
-}
-
 
 resource "aws_security_group" "acessos_workers" {
   name        = "devop5_multi_workers_sg"
@@ -208,19 +118,3 @@ output "aws_instance_e_ssh" {
     "worker ${key + 1} - ${item.public_ip} - ssh -i ~/.ssh/id_rsa ubuntu@${item.public_dns}"
   ]
 }
-
-# mostrar o sg-id
-#output "security_group_multi_master" {
-#  value = [
-#    for key, item in aws_security_group.acessos_master :
-#    "master ${key + 1} - ${item.id}"
-#  ]
-#}
-  
- 
-#output "security_group_multi_worker" {
-#  value = [
-#    for key, item in aws_security_group.acessos_workers :
-#    "worker ${key + 1} - ${item.id}"
-#  ]
-#}
