@@ -102,6 +102,15 @@ resource "aws_security_group" "acessos_workers" {
   }
 }
 
+variable "resource_id" {
+  type        = string
+  description = "Qual o id da máquina?"
+}
+
+variable "versao" {
+  type        = string
+  description = "Qual a versão da imagem?"
+}
 
 # terraform refresh para mostrar o ssh
 output "maquina_master" {
