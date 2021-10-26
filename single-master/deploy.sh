@@ -1,5 +1,5 @@
 #cd /home/ubuntu/gama_devop5/single-master/terraform
-cd single-master/terraform
+cd /terraform
 /usr/local/bin/terraform init
 /usr/local/bin/terraform fmt
 /usr/local/bin/terraform apply -auto-approve
