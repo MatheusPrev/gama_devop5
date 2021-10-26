@@ -26,6 +26,3 @@ cd terraform
 /usr/local/bin/terraform output
 
 echo $"Agora somente abrir a URL: http://$(/usr/local/bin/terraform output | grep public_dns | awk '{print $2;exit}'):8080" | sed -e "s/\",//g"
-
-ID_MAQUINA=$(/usr/local/bin/terraform output | grep id_ami | awk '{print $2;exit}')
-echo ${ID_MAQUINA/\",/}
