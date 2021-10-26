@@ -1,5 +1,5 @@
 #cd /home/ubuntu/gama_devop5/single-master/ami-terraform
-cd ..
+
 cd ami-terraform
 
 /usr/local/bin/terraform init
