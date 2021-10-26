@@ -207,3 +207,8 @@ output "aws_instance_e_ssh" {
     "worker ${key + 1} - ${item.public_ip} - ssh -i ~/.ssh/id_rsa ubuntu@${item.public_dns}"
   ]
 }
+output "aws_instance_id" {
+  value = [
+    "id: ${aws_instance.maquina_master.id}",
+  ]
+}
