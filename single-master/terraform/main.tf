@@ -207,7 +207,7 @@ resource "aws_security_group" "acessos_workers" {
 #    "worker ${key + 1} - ${item.public_ip} - ssh -i ~/.ssh/id_rsa ubuntu@${item.public_dns}"
 #  ]
 #}
-output "aws_instance_id" {
+output "aws_instance_outputID" {
   value = [
     "id: ${aws_instance.maquina_master.id}",
     "private: ${aws_instance.maquina_master.private_ip}",
