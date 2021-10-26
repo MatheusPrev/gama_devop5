@@ -2,12 +2,12 @@ pwd
 cd single-master/terraform
 /usr/local/bin/terraform output
 
-ID_MAQUINA=$(/usr/local/bin/terraform output | grep id_ami | awk '{print $2;exit}')
+ID_MAQUINA=$(/usr/local/bin/terraform output | grep id_ami | awk '{print $2;exit}' | cut -c 1-19)
 echo "=================[$ID_MAQUINA]===============" 
 
-ID_MAQUINA=${ID_MAQUINA/\",/}
+#ID_MAQUINA=${ID_MAQUINA/\",/}
 
-echo "=================[$ID_MAQUINA]===============" 
+#echo "=================[$ID_MAQUINA]===============" 
 
 cd ../
 cd ami-terraform
