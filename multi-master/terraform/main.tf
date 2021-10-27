@@ -48,13 +48,12 @@ resource "aws_instance" "k8s_proxy" {
     #kms_key_id  = "arn:aws:kms:us-east-1:534566538491:key/90847cc8-47e8-4a75-8a69-2dae39f0cc0d"
     volume_size = 20
   }
-
   vpc_security_group_ids = ["${aws_security_group.acessos_workers.id}"]
   count                  = 3
-}
   tags = {
     Name = "devop5_multi_haproxy"
   }
+
 }
 
 
