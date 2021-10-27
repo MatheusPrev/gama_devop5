@@ -82,17 +82,6 @@ resource "aws_security_group" "acessos_workers" {
   vpc_id      = "vpc-000ac43d9700f2e6c"
 
   ingress = [
-    # {
-    #  description      = "SSH from VPC"
-    #  from_port        = 22
-    #  to_port          = 22
-    #  protocol         = "tcp"
-    #  cidr_blocks      = ["0.0.0.0/0"] #["${chomp(data.http.myip.body)}/32"]
-    #  ipv6_cidr_blocks = ["::/0"]
-    #  prefix_list_ids  = null,
-    #  security_groups : null,
-    #  self : null
-    # },
     {
       cidr_blocks = [
         "0.0.0.0/0",
@@ -141,22 +130,11 @@ resource "aws_security_group" "acessos_workers" {
 }
 
 resource "aws_security_group" "acessos_master" {
-  name        = "devop5_multi_workers_sg"
+  name        = "devop5_multi_master_sg"
   description = "acessos_workers inbound traffic"
   vpc_id      = "vpc-000ac43d9700f2e6c"
 
   ingress = [
-    # {
-    #  description      = "SSH from VPC"
-    #  from_port        = 22
-    #  to_port          = 22
-    #  protocol         = "tcp"
-    #  cidr_blocks      = ["0.0.0.0/0"] #["${chomp(data.http.myip.body)}/32"]
-    #  ipv6_cidr_blocks = ["::/0"]
-    #  prefix_list_ids  = null,
-    #  security_groups : null,
-    #  self : null
-    # },
     {
       cidr_blocks = [
         "0.0.0.0/0",
