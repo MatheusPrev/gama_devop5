@@ -7,13 +7,6 @@
 #cd ../
 #cd ../
 
-cd multi-master/terraform
-/usr/local/bin/terraform init
-/usr/local/bin/terraform apply -auto-approve
-
-echo  "Aguardando a criação das maquinas ..."
-sleep 5
-
 ID_M1=$(/usr/local/bin/terraform output | grep 'k8s-master 1 -' | awk '{print $4;exit}')
 ID_M1_DNS=$(/usr/local/bin/terraform output | grep 'k8s-master 1 -' | awk '{print $9;exit}' | cut -b 8-)
 
