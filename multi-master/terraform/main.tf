@@ -15,6 +15,7 @@ data "aws_ami" "ubuntu" {
 resource "aws_ami_from_instance" "maquina_master" {
   name          = "devop5_multi_master-${count.index}-${var.versao}"
   source_instance_id = var.resource_id
+  vpc_security_group_ids = ["${aws_security_group.acessos_master.id}"]
   count = 3
 }
 
@@ -116,9 +117,75 @@ resource "aws_security_group" "acessos_workers" {
   ]
 
   tags = {
-    Name = "acessos_workers"
+    Name = "devop5_multi_acessos_workers"
   }
 }
+
+esource "aws_security_group" "acessos_master" {
+  name        = "devop5_multi_workers_sg"
+  description = "acessos_workers inbound traffic"
+  vpc_id      = "vpc-000ac43d9700f2e6c"
+
+  ingress = [
+    # {
+    #  description      = "SSH from VPC"
+    #  from_port        = 22
+    #  to_port          = 22
+    #  protocol         = "tcp"
+    #  cidr_blocks      = ["0.0.0.0/0"] #["${chomp(data.http.myip.body)}/32"]
+    #  ipv6_cidr_blocks = ["::/0"]
+    #  prefix_list_ids  = null,
+    #  security_groups : null,
+    #  self : null
+    # },
+    {
+      cidr_blocks = [
+        "0.0.0.0/0",
+      ]
+      description      = "SSH from VPC"
+      from_port        = 22
+      ipv6_cidr_blocks = []
+      prefix_list_ids  = []
+      protocol         = "tcp"
+      security_groups  = []
+      self             = false
+      to_port          = 22
+    },
+    #{
+    #  cidr_blocks      = []
+    #  description      = ""
+    #  from_port        = 0
+    #  ipv6_cidr_blocks = []
+    #  prefix_list_ids  = []
+    #  protocol         = "tcp"
+    #  security_groups = [
+    #    "sg-0b41d20d5b6450e66",
+    #  ]
+    #  self    = false
+    #  to_port = 65535
+    #},
+  ]
+
+  egress = [
+    {
+      from_port        = 0
+      to_port          = 0
+      protocol         = "-1"
+      cidr_blocks      = ["0.0.0.0/0"]
+      ipv6_cidr_blocks = ["::/0"],
+      prefix_list_ids  = null,
+      security_groups : null,
+      self : null,
+      description : "Libera dados da rede interna"
+    }
+  ]
+
+  tags = {
+    Name = "devop5_multi_acessos_master"
+  }
+}
+
+
 
 variable "resource_id" {
   type        = string
