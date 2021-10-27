@@ -100,9 +100,7 @@ resource "aws_security_group" "acessos_master" {
       prefix_list_ids  = []
       protocol         = "tcp"
       # security_groups = null,
-      security_groups = [
-         "sg-016f5d475a2ed4e5f",
-      ]
+      security_groups = ["${aws_instance.acessos_workers.id}",]
       self    = false
       to_port = 65535
     },
@@ -166,8 +164,18 @@ resource "aws_security_group" "acessos_workers" {
       prefix_list_ids  = []
       protocol         = "tcp"
       #security_groups = null,
-      security_groups = ["sg-0b92c1829f18f0db1","sg-016f5d475a2ed4e5f",]
+      security_groups = ["${aws_instance.acessos_master.id}",]
       self    = false
+      to_port = 65535
+    },
+    {
+      cidr_blocks      = []
+      description      = ""
+      from_port        = 0
+      ipv6_cidr_blocks = []
+      prefix_list_ids  = []
+      protocol         = "tcp"
+      self = true
       to_port = 65535
     },
   ]
