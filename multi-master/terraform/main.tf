@@ -192,18 +192,22 @@ variable "versao" {
   description = "Qual a versão da imagem?"
 }
 
-# terraform refresh para mostrar o ssh
-#output "maquina_master" {
-#  value = [
-#    for key, item in aws_ami_from_instance.maquina_master :
-#    "master ${key + 1} - ${item.public_ip} - ssh -i ~/.ssh/id_rsa ubuntu@${item.public_dns}"
-#  ]
-#}
+output "k8s-masters" {
+  value = [
+    for key, item in aws_instance.maquina_master :
+      "k8s-master ${key+1} - ${item.private_ip} - ssh -i ~/.ssh/id_rsa ubuntu@${item.public_dns} -o ServerAliveInterval=60"
+  ]
+}
 
-# terraform refresh para mostrar o ssh
-output "aws_instance_e_ssh" {
+output "output-k8s_workers" {
   value = [
     for key, item in aws_instance.workers :
-    "worker ${key + 1} - ${item.public_ip} - ssh -i ~/.ssh/id_rsa ubuntu@${item.public_dns}"
+      "k8s-workers ${key+1} - ${item.private_ip} - ssh -i ~/.ssh/id_rsa ubuntu@${item.public_dns} -o ServerAliveInterval=60"
+  ]
+}
+
+output "output-haproxy" {
+  value = [
+    "k8s_proxy - ${aws_instance.k8s_proxy.private_ip} - ssh -i ~/.ssh/id_rsa ubuntu@${aws_instance.k8s_proxy.public_dns} -o ServerAliveInterval=60"
   ]
 }
