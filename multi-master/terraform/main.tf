@@ -47,7 +47,6 @@ resource "aws_instance" "workers" {
   }
   subnet_id                   = "subnet-0dbc6439c94e66d76"
   associate_public_ip_address = true
-
   root_block_device {
     encrypted = true
     #kms_key_id  = "arn:aws:kms:us-east-1:534566538491:key/90847cc8-47e8-4a75-8a69-2dae39f0cc0d"
@@ -59,13 +58,12 @@ resource "aws_instance" "workers" {
 }
 
 resource "aws_instance" "k8s_proxy" {
-  ami           = "ami-09e67e426f25ce0d7"
+  ami           = "${data.aws_ami.ubuntu.id}"
   instance_type = "t2.micro"
   key_name      = "devop5_jenkins_out"
   associate_public_ip_address = true
   root_block_device {
     encrypted = true
-    #kms_key_id  = "arn:aws:kms:us-east-1:534566538491:key/90847cc8-47e8-4a75-8a69-2dae39f0cc0d"
     volume_size = 20
   }
   vpc_security_group_ids = ["${aws_security_group.acessos_workers.id}"]
