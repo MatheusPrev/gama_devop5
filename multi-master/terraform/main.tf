@@ -21,7 +21,7 @@ resource "aws_ami_from_instance" "maquina_master" {
 resource "aws_instance" "workers" {
   ami           = "${data.aws_ami.ubuntu.id}"
   instance_type = "t2.micro"
-  key_name      = "key_devop5_projeto"
+  key_name      = "devop5_jenkins_out"
   tags = {
     Name = "devop5_multi_worker-${count.index}"
   }
