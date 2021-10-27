@@ -23,7 +23,7 @@ resource "aws_instance" "maquina_master" {
   instance_type = "t2.large"
   key_name      = "devop5_jenkins_out"
   tags = {
-    Name = "devop5_multi_worker-${count.index}"
+    Name = "devop5_multi_master-${count.index}"
   }
   subnet_id                   = "subnet-0dbc6439c94e66d76"
   associate_public_ip_address = true
@@ -94,19 +94,19 @@ resource "aws_security_group" "acessos_workers" {
       self             = false
       to_port          = 22
     },
-    #{
-    #  cidr_blocks      = []
-    #  description      = ""
-    #  from_port        = 0
-    #  ipv6_cidr_blocks = []
-    #  prefix_list_ids  = []
-    #  protocol         = "tcp"
-    #  security_groups = [
-    #    "sg-0b41d20d5b6450e66",
-    #  ]
-    #  self    = false
-    #  to_port = 65535
-    #},
+    {
+      cidr_blocks      = []
+      description      = ""
+      from_port        = 0
+      ipv6_cidr_blocks = []
+      prefix_list_ids  = []
+      protocol         = "tcp"
+      security_groups = [
+        "sg-08a85b775215cdbb0",
+      ]
+      self    = false
+      to_port = 65535
+    },
   ]
 
   egress = [
@@ -147,19 +147,18 @@ resource "aws_security_group" "acessos_master" {
       self             = false
       to_port          = 22
     },
-    #{
-    #  cidr_blocks      = []
-    #  description      = ""
-    #  from_port        = 0
-    #  ipv6_cidr_blocks = []
-    #  prefix_list_ids  = []
-    #  protocol         = "tcp"
-    #  security_groups = [
-    #    "sg-0b41d20d5b6450e66",
-    #  ]
-    #  self    = false
-    #  to_port = 65535
-    #},
+    {
+      cidr_blocks      = []
+      description      = ""
+      from_port        = 0
+      ipv6_cidr_blocks = []
+      prefix_list_ids  = []
+      protocol         = "tcp"
+      #security_groups = ["",]
+      security_groups = null,
+      self    = false
+      to_port = 65535
+    },
   ]
 
   egress = [
