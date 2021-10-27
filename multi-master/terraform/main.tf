@@ -15,9 +15,6 @@ data "aws_ami" "ubuntu" {
 resource "aws_ami_from_instance" "maquina_master" {
   name          = "devop5_multi_master-${count.index}-${var.versao}"
   source_instance_id = var.resource_id
-  vpc_security_group_ids = ["${aws_security_group.acessos_master.id}"]
-  subnet_id                   = "subnet-0dbc6439c94e66d76"
-  associate_public_ip_address = true
   count = 3
   root_block_device {
     encrypted = true
