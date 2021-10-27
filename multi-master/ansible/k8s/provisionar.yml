@@ -37,7 +37,7 @@
         src: "haproxy/haproxy.cfg"
         dest: "/etc/haproxy/haproxy.cfg"
       become: yes
-      notify: "restart haproxy"
+      #notify: "restart haproxy"
 ---
 - hosts:
   - ec2-k8s-m1
