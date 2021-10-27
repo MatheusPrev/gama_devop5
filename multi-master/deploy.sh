@@ -1,15 +1,15 @@
-cd single-master/ami-terraform
-/usr/local/bin/terraform init
-/usr/local/bin/terraform output
-ID_AMI=$(/usr/local/bin/terraform output | grep AMI | awk '{print $2;exit}' | cut -c 1-21)
-echo "=================[$ID_AMI]===============" 
+#cd single-master/ami-terraform
+#/usr/local/bin/terraform init
+#/usr/local/bin/terraform output
+#ID_AMI=$(/usr/local/bin/terraform output | grep AMI | awk '{print $2;exit}' | cut -c 1-21)
+#echo "=================[$ID_AMI]===============" 
 
-cd ../
-cd ../
+#cd ../
+#cd ../
 
 cd multi-master/terraform
 /usr/local/bin/terraform init
-/usr/local/bin/terraform apply -var="resource_id=$ID_AMI" -auto-approve
+/usr/local/bin/terraform apply -auto-approve
 
 echo  "Aguardando a criação das maquinas ..."
 sleep 5
