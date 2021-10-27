@@ -208,6 +208,6 @@ output "output-k8s_workers" {
 
 output "output-haproxy" {
   value = [
-    "k8s_proxy - ${aws_instance.k8s_proxy.private_ip} - ssh -i ~/.ssh/id_rsa ubuntu@${aws_instance.k8s_proxy.public_dns} -o ServerAliveInterval=60"
+    "k8s_proxy - ${aws_instance.haproxy.private_ip} - ssh -i ~/.ssh/id_rsa ubuntu@${aws_instance.haproxy.public_dns} -o ServerAliveInterval=60"
   ]
 }
