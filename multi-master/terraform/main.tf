@@ -121,7 +121,7 @@ resource "aws_security_group" "acessos_workers" {
   }
 }
 
-esource "aws_security_group" "acessos_master" {
+resource "aws_security_group" "acessos_master" {
   name        = "devop5_multi_workers_sg"
   description = "acessos_workers inbound traffic"
   vpc_id      = "vpc-000ac43d9700f2e6c"
