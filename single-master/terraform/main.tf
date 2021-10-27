@@ -99,7 +99,7 @@ resource "aws_security_group" "acessos_master" {
       ipv6_cidr_blocks = []
       prefix_list_ids  = []
       protocol         = "tcp"
-      security_groups = null,
+      #security_groups = null,
       security_groups = ["${aws_instance.acessos_workers.id}",]
       self    = false
       to_port = 65535
@@ -163,7 +163,7 @@ resource "aws_security_group" "acessos_workers" {
       ipv6_cidr_blocks = []
       prefix_list_ids  = []
       protocol         = "tcp"
-      security_groups = null,
+      #security_groups = null,
       security_groups = ["${aws_instance.acessos_master.id}","${aws_instance.acessos_workers.id}",]
       self    = false
       to_port = 65535
