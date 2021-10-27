@@ -28,7 +28,7 @@ cat <<EOF > 2-provisionar-k8s-master-auto-shell.yml
       shell: sudo chown $(id -u):$(id -g) $HOME/.kube/config
     - name: "Colocando no path da maquina o conf do kubernetes 4"
       shell: export KUBECONFIG=/etc/kubernetes/admin.conf
-#---
+---
 - hosts:
   - ec2-k8s-w1
   - ec2-k8s-w2
@@ -39,7 +39,7 @@ cat <<EOF > 2-provisionar-k8s-master-auto-shell.yml
       shell: "kubeadm reset -f"
     - name: "Fazendo join kubernetes worker"
       shell: $K8S_JOIN_WORKER
-#---
+---
 - hosts:
   - ec2-k8s-m1
   become: yes
