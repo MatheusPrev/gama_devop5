@@ -1,4 +1,4 @@
-cd ../ansible/k8s
+cd multi-master/ansible/k8s
 
 ANSIBLE_OUT=$(ansible-playbook -i hosts provisionar.yml -u ubuntu --private-key ~/.ssh/id_rsa)
 
