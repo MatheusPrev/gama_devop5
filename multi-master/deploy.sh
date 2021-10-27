@@ -1,6 +1,15 @@
+cd single-master/ami-terraform
+/usr/local/bin/terraform init
+/usr/local/bin/terraform output
+ID_AMI=$(/usr/local/bin/terraform output | grep AMI | awk '{print $2;exit}' | cut -c 1-21)
+echo "=================[$ID_AMI]===============" 
+
+cd ../
+cd ../
+
 cd multi-master/terraform
 /usr/local/bin/terraform init
-/usr/local/bin/terraform apply -auto-approve
+/usr/local/bin/terraform apply -var="resource_id=$ID_AMI" -auto-approve
 
 echo  "Aguardando a criação das maquinas ..."
 sleep 5
@@ -43,7 +52,7 @@ $ID_W1_DNS
 $ID_W2_DNS
 [ec2-k8s-w3]
 $ID_W3_DNS
-" > ../2-ansible/01-k8s-install-masters_e_workers/hosts
+" > ../ansible/k8s/hosts
 
 echo "
 global
@@ -89,7 +98,7 @@ backend k8s-masters
         server k8s-master-1 $ID_M2:6443 check fall 3 rise 2 # IP ec2 Cluster Master k8s - 2 
         server k8s-master-2 $ID_M3:6443 check fall 3 rise 2 # IP ec2 Cluster Master k8s - 3 
         
-" > ../2-ansible/01-k8s-install-masters_e_workers/haproxy/haproxy.cfg
+" > ../ansible/k8s/haproxy/haproxy.cfg
 
 
 echo "
