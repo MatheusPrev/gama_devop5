@@ -15,8 +15,15 @@ data "aws_ami" "ubuntu" {
 resource "aws_ami_from_instance" "maquina_master" {
   name          = "devop5_multi_master-${count.index}-${var.versao}"
   source_instance_id = var.resource_id
-  #vpc_security_group_ids = ["${aws_security_group.acessos_master.id}"]
+  vpc_security_group_ids = ["${aws_security_group.acessos_master.id}"]
+  subnet_id                   = "subnet-0dbc6439c94e66d76"
+  associate_public_ip_address = true
   count = 3
+  root_block_device {
+    encrypted = true
+    #kms_key_id  = "arn:aws:kms:us-east-1:534566538491:key/90847cc8-47e8-4a75-8a69-2dae39f0cc0d"
+    volume_size = 20
+  }
 }
 
 resource "aws_instance" "workers" {
