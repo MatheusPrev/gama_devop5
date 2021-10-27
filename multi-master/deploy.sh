@@ -10,8 +10,8 @@ echo $K8S_JOIN_WORKER
 
 cat <<EOF > 2-provisionar-k8s-master-auto-shell.yml
 - hosts:
-  - ec2-k8s-m2
-  - ec2-k8s-m3
+    - ec2-k8s-m2
+    - ec2-k8s-m3
   become: yes
   tasks:
     - name: "Reset cluster"
@@ -28,20 +28,20 @@ cat <<EOF > 2-provisionar-k8s-master-auto-shell.yml
       shell: sudo chown $(id -u):$(id -g) $HOME/.kube/config
     - name: "Colocando no path da maquina o conf do kubernetes 4"
       shell: export KUBECONFIG=/etc/kubernetes/admin.conf
----
+#---
 - hosts:
-  - ec2-k8s-w1
-  - ec2-k8s-w2
-  - ec2-k8s-w3
+    - ec2-k8s-w1
+    - ec2-k8s-w2
+    - ec2-k8s-w3
   become: yes
   tasks:
     - name: "Reset cluster"
       shell: "kubeadm reset -f"
     - name: "Fazendo join kubernetes worker"
       shell: $K8S_JOIN_WORKER
----
+#---
 - hosts:
-  - ec2-k8s-m1
+    - ec2-k8s-m1
   become: yes
   tasks:
     - name: "Configura weavenet para reconhecer os nós master e workers"
