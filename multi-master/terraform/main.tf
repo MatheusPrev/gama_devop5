@@ -49,7 +49,6 @@ resource "aws_instance" "k8s_proxy" {
     volume_size = 20
   }
   vpc_security_group_ids = ["${aws_security_group.acessos_workers.id}"]
-  count                  = 3
   tags = {
     Name = "devop5_multi_haproxy"
   }
