@@ -12,30 +12,30 @@ data "aws_ami" "ubuntu" {
   }
 }
 
-#resource "aws_ami_from_instance" "maquina_master" {
-# name          = "devop5_multi_master-${count.index}-${var.versao}"
-# source_instance_id = var.resource_id
-# count = 3
-#}
-
-resource "aws_instance" "maquina_master" {
-  ami           = "${data.aws_ami.ubuntu.id}"
-  instance_type = "t2.large"
-  key_name      = "devop5_jenkins_out"
-  tags = {
-    Name = "devop5_multi_master-${count.index}"
-  }
-  subnet_id                   = "subnet-0dbc6439c94e66d76"
-  associate_public_ip_address = true
-
-  root_block_device {
-    encrypted = true
-    volume_size = 20
-  }
-
-  vpc_security_group_ids = ["${aws_security_group.acessos_master.id}"]
-  count                  = 3
+resource "aws_ami_from_instance" "maquina_master" {
+ name          = "devop5_multi_master-${count.index}-${var.versao}"
+ source_instance_id = var.resource_id
+ count = 3
 }
+
+#resource "aws_instance" "maquina_master" {
+#  ami           = "${data.aws_ami.ubuntu.id}"
+#  instance_type = "t2.large"
+#  key_name      = "devop5_jenkins_out"
+#  tags = {
+#    Name = "devop5_multi_master-${count.index}"
+#  }
+#  subnet_id                   = "subnet-0dbc6439c94e66d76"
+#  associate_public_ip_address = true
+
+#  root_block_device {
+#    encrypted = true
+#    volume_size = 20
+#  }
+#
+#  vpc_security_group_ids = ["${aws_security_group.acessos_master.id}"]
+# count                  = 3
+#}
 
 
 resource "aws_instance" "workers" {
